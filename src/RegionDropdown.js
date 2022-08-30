@@ -61,7 +61,6 @@ export default class RegionDropdown extends PureComponent {
 
 	getRegionList () {
 		const { labelType, valueType } = this.props;
-		//console.error(this.state);
 		return this.state.regions.map(({ regionName, regionShortCode }) => {
 			const label = (labelType === C.DISPLAY_TYPE_FULL) ? regionName : regionShortCode;
 			const value = (valueType === C.DISPLAY_TYPE_FULL) ? regionName : regionShortCode;
