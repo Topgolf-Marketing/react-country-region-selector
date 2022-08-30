@@ -254,6 +254,9 @@ export interface RegionDropdownProps<T = Element> {
    * Default value: []
    */
   customOptions?: string[];
+
+  whitelist?: [string[]];
+  blacklist?: [string[]];
 }
 
 export class RegionDropdown extends React.Component<RegionDropdownProps> {}
