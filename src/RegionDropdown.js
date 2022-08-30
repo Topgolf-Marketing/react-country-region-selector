@@ -110,7 +110,7 @@ export default class RegionDropdown extends PureComponent {
 				{this.getDefaultOption()}
 				{this.getRegionList()}
 			</select>
-		);Microsoft Visio 2010
+		);
 	}
 }
 
