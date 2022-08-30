@@ -8,49 +8,26 @@ export default class RegionDropdown extends PureComponent {
 	constructor (props) {
 		super(props);
 		this.state = {
-			regions: this.getRegions(props.country)
+			regions: [
+				...this.getRegions(this.props.country),
+				...this.props.customOptions
+			]
 		};
 		this.getRegions = this.getRegions.bind(this);
 	}
 
 	componentDidUpdate (prevProps) {
-		const { country } = this.props;
+		const { country, customOptions } = this.props;
 		if (country === prevProps.country) {
 			return;
 		}
 
-		const defaultRegions = this.getRegions(country);
-
 		this.setState({
 			regions: [
-				...defaultRegions,
-				...this.getCustomOptions(defaultRegions)
+				...this.getRegions(country),
+				...customOptions
 			]
 		});
-	}
-
-	getCustomOptions (regions) {
-		const { customOptions } = this.props;
-
-		const duplicateRegions = this.getDuplicates(regions);
-
-		if (duplicateRegions.length) {
-			console.error('Error: Duplicate regions present: ' + duplicateRegions.toString() + '.\nThe above item(s) is/are already getting added to the region dropdown by the library.');
-			return [];
-		}
-
-		return customOptions.map((option) => {
-			if (option) {
-				return { regionName: option.regionName, regionShortCode: option.regionShortCode };
-			}
-		});
-	}
-
-	getDuplicates (regions) {
-		const { customOptions, valueType } = this.props;
-		const regionKey = valueType === C.DISPLAY_TYPE_FULL ? 'regionName' : 'regionShortCode';
-
-		return regions.filter((region) => customOptions.indexOf(region[regionKey]) !== -1).map(region => region[regionKey]);
 	}
 
 	getRegions (country) {
@@ -84,6 +61,7 @@ export default class RegionDropdown extends PureComponent {
 
 	getRegionList () {
 		const { labelType, valueType } = this.props;
+		//console.error(this.state);
 		return this.state.regions.map(({ regionName, regionShortCode }) => {
 			const label = (labelType === C.DISPLAY_TYPE_FULL) ? regionName : regionShortCode;
 			const value = (valueType === C.DISPLAY_TYPE_FULL) ? regionName : regionShortCode;
@@ -132,7 +110,7 @@ export default class RegionDropdown extends PureComponent {
 				{this.getDefaultOption()}
 				{this.getRegionList()}
 			</select>
-		);
+		);Microsoft Visio 2010
 	}
 }
 
