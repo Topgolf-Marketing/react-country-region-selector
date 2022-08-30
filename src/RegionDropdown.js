@@ -41,7 +41,7 @@ export default class RegionDropdown extends PureComponent {
 
 		return customOptions.map((option) => {
 			if (option) {
-				return { regionName: option, regionShortCode: option };
+				return { regionName: option.regionName, regionShortCode: option.regionShortCode };
 			}
 		});
 	}

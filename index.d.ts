@@ -255,7 +255,7 @@ export interface RegionDropdownProps<T = Element> {
    *
    * Default value: []
    */
-  customOptions?: string[];
+  customOptions?: { regionName: string, regionShortCode: string }[];
 
   whitelist?: RegionList;
   blacklist?: RegionList;
